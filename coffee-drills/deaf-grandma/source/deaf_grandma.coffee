@@ -1,55 +1,31 @@
-#prompt = require 'prompt'
-
-#prompt.start()
-
-# getUserInput = ->
-#   prompt.get(
-#     ['input']
-#     ,
-#     ( err , result ) ->
-#       result.input
-#   )
-
-
 util = require 'util'
+rl = require 'readline'
 
+prompts = rl.createInterface
+  input: process.stdin,
+  output: process.stdout
 
 grandmaResponse = (user_input) ->
-  inputText = "#{user_input}"
-  inputCapitals = "#{user_input}".toUpperCase()
+  inputCapitals = user_input.toUpperCase()
 
-  if inputText == ""
-    console.log "*Grandma continues watching TV*"
-  else if inputText == inputCapitals
-    console.log "NOT SINCE 1987"
+  if user_input == ""
+    "*Grandma continues watching TV*"
+  else if user_input == inputCapitals
+    "NOT SINCE 1987"
   else
-    console.log "SPEAK UP SONNY!!!"
-
-
-titleScreen = ->
-  console.log "*****\nWelcome to Deaf Grandma\n*****"
-
-
-getuserInput = ->
-  process.stdin.setEncoding('utf8')
-  process.stdin.resume()
-  process.stdin.on('data',
-    (text) ->
-        text.toString().trim()
-      #return text only if new line
-      #if ^^ pass to grandma engine
-  )
-
+    "SPEAK UP SONNY!!!"
 
 grandmaEngine = ->
-  counter = 0
-  titleScreen()
+  console.log "*****\nWelcome to Deaf Grandma\n*****"
 
-  until counter == 2
-    input = getUserInput()
-    grandmaResponse(input)
-    process.exit() if counter == 2
-    counter += 1 if input == ""
+  prompts.question "Ask Grandma a question: ",
+    (ask) ->
+      if ask
+        console.log(grandmaResponse(ask))
+        grandmaEngine()
+      else if ask == ""
+        console.log(grandmaResponse(ask))
+        process.exit()
 
 grandmaEngine()
 
