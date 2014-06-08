@@ -24,16 +24,18 @@ NOTES by Chapter
 - define_method <= check into this
 - serialize <= check into this
 
-2. View
+3. View
 - Semantic markup is king (separate content & presentation in HTML)
 - Use your helpers
 - Use HAML
 
-3. Controller
+4. Controller
 - Never roll your own authentication
 - REST, REST, REST
 - Separate nonRESTFUL actions into a separate controller (e.g. Dashboard)
 - Use complete integration testing before refactoring a bloated controller
+- Use separate controllers for each nesting; not completely dry but reduces lots of if/then logic
 
-
+5. Services
+- Don't rescue all exceptions
 ...
