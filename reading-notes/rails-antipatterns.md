@@ -37,5 +37,6 @@ NOTES by Chapter
 - Use separate controllers for each nesting; not completely dry but reduces lots of if/then logic
 
 5. Services
-- Don't rescue all exceptions
+- Don't rescue all exceptions, locate which exceptions can be raised by the service you're using
+- Use error logging services like New Relic, Exceptional, Airbrake
 ...
