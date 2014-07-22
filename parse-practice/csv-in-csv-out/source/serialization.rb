@@ -18,11 +18,17 @@ class PersonParser
     @people = nil
   end
 
+  # def people
+  #   return @people if @people
+  #   @csv = CSV.new(file, :headers => true, :header_converters => :symbol)
+  #   puts @csv.to_a.inspect
+  # end
+
   def people
     return @people if @people
-
+#
     empty_array = []
-
+#
     CSV.foreach(file, :headers => true, :header_converters => :symbol) do |row|
       empty_array << Person.new({
         id: row[:id],
@@ -37,5 +43,5 @@ class PersonParser
 end
 
 parser = PersonParser.new('people.csv')
-
-puts "There are #{parser.people.size} people in the file '#{parser.file}'."
+parser.people
+#puts "There are #{parser.people.size} people in the file '#{parser.file}'."
